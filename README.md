@@ -10,4 +10,6 @@ Test project based on Laravel 10 framework with Inertia and Vue 3
 - `./vendor/bin/sail composer install`- `./vendor/bin/sail npm install'`
 - `./vendor/bin/sail npm run dev'`
 - `./vendor/bin/sail migrate:fresh --seed`
-- open `http://localhost/`
+- open `http://localhost/articles`
+- test user: admin@example.com
+- test password: secret123
