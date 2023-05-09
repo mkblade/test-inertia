@@ -17,7 +17,10 @@ class ArticleFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            //can be and must be overwritten programmatically
+            'user_id' => 1,
+            'title' => fake()->realText(32),
+            'content' => fake()->realText(400),
         ];
     }
 }
