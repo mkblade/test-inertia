@@ -19,6 +19,10 @@ class ArticleResource extends JsonResource
             'title' => $this->title,
             'content' => str($this->content)->limit(50),
             'created_at' => $this->created_at->format('d.m.Y'),
+            'user' => [
+                'id' => $this->user->id,
+                'name' => $this->user->name,
+            ]
         ];
     }
 }

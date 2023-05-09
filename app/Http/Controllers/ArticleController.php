@@ -13,7 +13,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = ArticleResource::collection(Article::latest()->take(10)->get());
+        $articles = ArticleResource::collection(Article::with('user')->latest()->take(10)->get());
 
         return inertia('Article/Index', compact('articles'));
     }
