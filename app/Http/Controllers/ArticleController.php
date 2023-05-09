@@ -12,7 +12,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::latest()->paginate(10);
+        $articles = Article::latest()->take(10)->get();
 
         return inertia('Article/Index', compact('articles'));
     }
