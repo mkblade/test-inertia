@@ -29,7 +29,9 @@ class ArticleController extends Controller
             'user_id' => auth()->id(),
         ]);
 
-        return redirect()->route('articles.index')->with(['message' => 'Article has been created successfully']);
+        return redirect()->route('articles.index')->with([
+            'message' => 'Article has been created successfully',
+        ]);
     }
 
     /**
@@ -53,15 +55,19 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        //
+        return inertia('Article/Edit', compact('article'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Article $article)
+    public function update(ArticleStoreRequest $request, Article $article)
     {
-        //
+        $article->update($request->validated());
+
+        return redirect()->route('articles.index')->with([
+            'message' => 'Article has been updated successfully',
+        ]);
     }
 
     /**
@@ -69,6 +75,10 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        $article->delete();
+
+        return redirect()->route('articles.index')->with([
+            'message' => 'Article has been deleted completely',
+        ]);
     }
 }
