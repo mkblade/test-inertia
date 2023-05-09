@@ -37,6 +37,9 @@
   <main id="mainContent" class="min-h-[calc(100vh-56px)] py-6 mt-14">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-white overflow-hidden sm:rounded-lg">
+        <div v-if="$page.props.flash.message" class="bg-indigo-400 text-white p-4 mx-6 text-center">
+          {{ $page.props.flash.message }}
+        </div>
         <!-- Content goes here -->
         <slot />
       </div>
