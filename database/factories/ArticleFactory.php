@@ -18,8 +18,8 @@ class ArticleFactory extends Factory
     {
         return [
             //can be and must be overwritten programmatically
-            'user_id' => 1,
-            'title' => fake()->realText(32),
+            'user_id' => rand(1, 10),
+            'title' => ucfirst(fake()->words(5, true)),
             'content' => fake()->realText(400),
         ];
     }
