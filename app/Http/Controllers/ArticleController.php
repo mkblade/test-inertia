@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ArticleResource;
 use App\Models\Article;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::latest()->take(10)->get();
+        $articles = ArticleResource::collection(Article::latest()->take(10)->get());
 
         return inertia('Article/Index', compact('articles'));
     }
