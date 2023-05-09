@@ -18,6 +18,8 @@ use Inertia\Inertia;
 
 Route::get('/', \App\Http\Controllers\HomeController::class);
 
+Route::resource('articles', \App\Http\Controllers\ArticleController::class);
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
