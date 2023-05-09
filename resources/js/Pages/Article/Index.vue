@@ -44,7 +44,7 @@
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200 divide-solid">
-            <tr v-for="article in articles">
+            <tr v-for="article in articles" class="hover:bg-gray-100">
               <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                 {{ article.id }}
               </td>
