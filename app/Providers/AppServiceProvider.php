@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\ServiceProvider;
 
@@ -22,5 +23,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // disable 'data' object wrapper {data:[{id...},{id...}]} ->  {[{id...},{id...}]}
         JsonResource::withoutWrapping();
+
+        Model::preventLazyLoading();
     }
 }
