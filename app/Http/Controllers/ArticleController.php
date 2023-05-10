@@ -9,12 +9,16 @@ use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
+    protected static int $PER_PAGE_COUNT = 10;
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $articles = ArticleResource::collection(Article::with('user')->latest()->take(10)->get());
+        $articles = ArticleResource::collection(
+            Article::with('user')->latest()->paginate(self::$PER_PAGE_COUNT)
+        );
 
         return inertia('Article/Index', compact('articles'));
     }

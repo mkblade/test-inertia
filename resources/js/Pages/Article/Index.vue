@@ -7,6 +7,7 @@
   import Modal from '@/Components/Modal.vue';
   import DangerButton from '@/Components/DangerButton.vue';
   import SecondaryButton from '@/Components/SecondaryButton.vue';
+  import Pagination from "@/Components/Pagination.vue";
 
   defineProps({
     articles: Object,
@@ -68,7 +69,7 @@
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200 divide-solid">
-            <tr v-for="article in articles" class="hover:bg-gray-100">
+            <tr v-for="article in articles.data" class="hover:bg-gray-100">
               <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                 {{ article.id }}
               </td>
@@ -101,6 +102,8 @@
             </tr>
           </tbody>
         </table>
+
+        <Pagination :links="articles.meta.links || []" />
 
         <Modal :show="showConfirmationModal" @close="closeModal">
           <div class="p-6">
