@@ -3,16 +3,32 @@
   import AppLayout from '@/Layouts/AppLayout.vue';
   import Edit from 'vue-material-design-icons/Pencil.vue';
   import Delete from 'vue-material-design-icons/Delete.vue';
+  import { ref } from 'vue';
+  import Modal from '@/Components/Modal.vue';
+  import DangerButton from '@/Components/DangerButton.vue';
+  import SecondaryButton from '@/Components/SecondaryButton.vue';
 
   defineProps({
     articles: Object,
   });
 
-  const destroy = (id) => {
-    if (confirm('Are you sure you want to delete it?')) {
-      router.delete('/articles/' + id);
-    }
+  const showConfirmationModal = ref(false);
+  const selectedArticle = ref(null);
+
+  const confirmDeleteArticle = (article) => {
+    selectedArticle.value = article;
+    showConfirmationModal.value = true;
   };
+
+  const closeModal = () => {
+    showConfirmationModal.value = false;
+    selectedArticle.value = null;
+  };
+
+  const destroy = (id) =>
+    router.delete('/articles/' + id, {
+      onFinish: () => closeModal(),
+    });
 </script>
 
 <template>
@@ -74,7 +90,7 @@
                     <Edit :size="28" fill-color="#F4CA16" />
                   </Link>
                   <button
-                    @click="destroy(article.id)"
+                    @click="confirmDeleteArticle(article)"
                     type="button"
                     class="hover:bg-gray-200 rounded-full p-2"
                   >
@@ -85,6 +101,18 @@
             </tr>
           </tbody>
         </table>
+
+        <Modal :show="showConfirmationModal" @close="closeModal">
+          <div class="p-6">
+            <div class="text-lg font-semibold text-gray-800">
+              Do you really want to delete article "{{ selectedArticle.title }}"?
+            </div>
+            <div class="mt-6 flex justify-center space-x-4">
+              <DangerButton @click="destroy(selectedArticle.id)">Delete</DangerButton>
+              <SecondaryButton @click="closeModal">Cancel</SecondaryButton>
+            </div>
+          </div>
+        </Modal>
       </div>
     </div>
   </AppLayout>
